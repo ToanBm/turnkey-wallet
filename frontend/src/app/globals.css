@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F6F6F5;
+  --foreground: #1B2535;
+  --primary-background: #ffffff;
+  --secondary-background: #f0f0f0;
+  --button-primary: #836EF9;
+  --button-inactive: #FEFEFE;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary-background: var(--primary-background);
+  --color-secondary-background: var(--secondary-background);
+  --color-button-primary: var(--button-primary);
+  --color-button-inactive: var(--button-inactive);
+  --font-sans: 'Satoshi', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #F6F6F5;
+    --foreground: #1B2535;
+    --primary-background: #ffffff;
+    --secondary-background: #f0f0f0;
+    --button-primary: #836EF9;
+    --button-inactive: #FEFEFE;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Satoshi', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Improve font rendering for better readability */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+button, input, select, textarea {
+  font-family: 'Satoshi', sans-serif;
+}
+
+/* Code and monospace elements */
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
