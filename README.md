@@ -3,7 +3,6 @@
 ## 📋 Table of Contents
 - [MetaSwap Overview](#metaswap-overview)
 - [Turnkey Wallet Integration](#-turnkey-wallet-integration)
-- [Envio Indexer Integration](#envio-indexer-integration)
 
 ---
 
@@ -17,7 +16,6 @@ MetaSwap is a cutting-edge DeFi platform that enables seamless token swapping wi
 - **🔑 Passkey Signing**: Secure transaction signing with WebAuthn
 - **🌐 Multi-Chain Support**: Seamlessly switch between Sepolia and Monad testnets
 - **💱 Token Swapping**: Swap between native tokens (ETH/MON) and mUSD (MonadUSD)
-- **📊 Real-time Tracking**: Monitor all swap activities via Envio indexer
 - **⚡ Gas Optimized**: EOA transactions with auto-estimate gas
 
 ### 🛠️ Tech Stack
@@ -26,12 +24,10 @@ MetaSwap is a cutting-edge DeFi platform that enables seamless token swapping wi
 - **Wallet Auth**: Turnkey Wallet Kit, Turnkey SDK Browser
 - **Blockchain**: wagmi, viem, ethers
 - **Transaction Signing**: TurnkeySigner with Passkey support
-- **Indexing**: Envio Protocol
 
 ### 📱 Pages
 - **Wallet Dashboard**: Send tokens (ETH/MON/mUSD) from Turnkey wallet
 - **Swap**: Execute token swaps with allowance optimization
-- **Envio Dashboard**: Real-time tracking of all swap activities
 
 ---
 
@@ -200,80 +196,6 @@ if (currentAllowance < requiredAmount) {
 
 ---
 
-## 📊 Envio Indexer Integration
-
-MetaSwap integrates with Envio Protocol to provide real-time indexing and querying of swap events. All swap transactions are automatically indexed and can be queried through GraphQL.
-
-### 🔗 Endpoint
-```
-https://indexer.dev.hyperindex.xyz/9cb1975/v1/graphql
-```
-
-### 📝 Available Events
-- `SwapHub_SwapETHForToken`: ETH → mUSD swaps
-- `SwapHub_SwapTokenForETH`: mUSD → ETH swaps
-
-### 💻 GraphQL Query Example
-
-```graphql
-query {
-  SwapHub_SwapETHForToken(limit: 5, order_by: { timestamp: desc }) {
-    user
-    ethIn
-    tokenOut
-    timestamp
-  }
-  SwapHub_SwapTokenForETH(limit: 5, order_by: { timestamp: desc }) {
-    user
-    tokenIn
-    ethOut
-    timestamp
-  }
-}
-```
-
-### 📈 Sample Response
-
-```json
-{
-  "data": {
-    "SwapHub_SwapETHForToken": [
-      {
-        "user": "0xc796fb3F2298159Dc272E42a1D8A98Fdd3992268",
-        "ethIn": "10000000000000000",
-        "tokenOut": "10000000000000000000",
-        "timestamp": "1761021068"
-      },
-      {
-        "user": "0xc796fb3F2298159Dc272E42a1D8A98Fdd3992268",
-        "ethIn": "10000000000000000",
-        "tokenOut": "10000000000000000000",
-        "timestamp": "1761020750"
-      }
-    ],
-    "SwapHub_SwapTokenForETH": [
-      {
-        "user": "0xc796fb3F2298159Dc272E42a1D8A98Fdd3992268",
-        "tokenIn": "1000000000000000000",
-        "ethOut": "1000000000000000",
-        "timestamp": "1761019909"
-      }
-    ]
-  }
-}
-```
-
-### 🔍 Field Descriptions
-- **user**: Smart Account address that performed the swap
-- **ethIn/tokenIn**: Input amount (in wei for ETH, in token units for mUSD)
-- **ethOut/tokenOut**: Output amount (in wei for ETH, in token units for mUSD)
-- **timestamp**: Unix timestamp of the transaction
-
-### 📊 Real-time Dashboard
-The Envio Dashboard in MetaSwap automatically queries this endpoint every 30 seconds to display the latest swap activities in a user-friendly format.
-
----
-
 ## 🚀 Getting Started
 
 ### 1. **Install Dependencies**
@@ -342,18 +264,12 @@ npm run dev
 - First time: Approve + Swap (2 TXs)
 - After: Only Swap (1 TX - allowance cached!)
 
-#### **D. View Transaction History**
-- Go to **Envio Dashboard**
-- See real-time swap events
-- Filter by direction (ETH→mUSD or mUSD→ETH)
-
 ---
 
 ## 📚 Smart Contracts
 
 - **TestToken (MonadUSD)**: ERC-20 token with faucet functionality
 - **MetaSwap**: Core swapping contract for ETH/MON ↔ mUSD
-- **SwapHub**: Event recording contract for Envio indexing
 
 **Deployment Networks:**
 - ✅ Sepolia Testnet (Chain ID: 11155111)
@@ -437,7 +353,6 @@ npm run dev
 
 - **Turnkey Docs**: [https://docs.turnkey.com](https://docs.turnkey.com)
 - **Turnkey Dashboard**: [https://app.turnkey.com](https://app.turnkey.com)
-- **Envio Docs**: [https://docs.envio.dev](https://docs.envio.dev)
 - **Sepolia Faucet**: [https://sepoliafaucet.com](https://sepoliafaucet.com)
 - **Monad Docs**: [https://docs.monad.xyz](https://docs.monad.xyz)
 
@@ -452,6 +367,5 @@ MIT License - feel free to use and modify as needed.
 ## 🙏 Acknowledgments
 
 - **Turnkey** for providing wallet infrastructure
-- **Envio** for real-time indexing
 - **Monad** for testnet access
 - **Sepolia** testnet community
